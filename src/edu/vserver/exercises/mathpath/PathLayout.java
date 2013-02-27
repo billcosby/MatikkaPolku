@@ -7,11 +7,14 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 
 public class PathLayout extends AbsoluteLayout {
 
 	private static final long serialVersionUID = 1L;
 	private final ArrayList<Button> currentOptions;
+	private Button correctOption;
+	
 	private final Label label;
 	private final Button middleButton;
 
@@ -38,12 +41,28 @@ public class PathLayout extends AbsoluteLayout {
 		b.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				// currently just removes the clicked option
-				removeOption(event.getButton());
+				
+				if (event.getButton() == correctOption) {
+					handleCorrectAnswer();
+				}
+				else {
+					handleWrongAnswer();
+					event.getButton().setEnabled(false);
+				}	
 			}
+
+
 		});
 		currentOptions.add(b);
 		updatePositions();
+	}
+	
+	private void handleWrongAnswer() {
+		Notification.show("Try again!");
+	}
+
+	private void handleCorrectAnswer() {
+		Notification.show("Correct!");
 	}
 
 	public void removeOption(Button b) {
@@ -80,15 +99,9 @@ public class PathLayout extends AbsoluteLayout {
 		// find the correct option button and add a click listener to it
 		for (int i = 0; i < currentOptions.size(); i++) {
 			if (currentOptions.get(i).getCaption().equals(riddle)) {
-				currentOptions.get(i).addClickListener(
-						new Button.ClickListener() {
-
-							@Override
-							public void buttonClick(ClickEvent event) {
-								changeData("Oikein!");
-							}
-
-						});
+				
+				correctOption = currentOptions.get(i);
+				
 			}
 		}
 	}
@@ -104,5 +117,7 @@ public class PathLayout extends AbsoluteLayout {
 		currentOptions.clear();
 
 	}
+	
+	
 
 }
