@@ -4,12 +4,22 @@ import com.vaadin.shared.ui.AlignmentInfo.Bits;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-import edu.vserver.exercises.helpers.ExerTypeVoidImplCollection.RealSimpleExerciseExecutor;
+import edu.vserver.exercises.model.ExecutionSettings;
+import edu.vserver.exercises.model.ExecutionState;
+import edu.vserver.exercises.model.ExecutionStateChangeListener;
+import edu.vserver.exercises.model.Executor;
+import edu.vserver.exercises.model.ExerciseException;
+import edu.vserver.exercises.model.ExerciseMaterialManager;
+import edu.vserver.exercises.model.ResourceGiver;
+import edu.vserver.exercises.model.SubmissionListener;
+import edu.vserver.exercises.model.SubmissionType;
 
-public class EmptyExecutor extends RealSimpleExerciseExecutor {
+public class EmptyExecutor extends VerticalLayout implements
+        Executor<MathPathExerciseData, MathPathSubmissionInfo> {
 
     private static final long serialVersionUID = 645228793345434162L;
 
@@ -18,7 +28,6 @@ public class EmptyExecutor extends RealSimpleExerciseExecutor {
     private PathLayout pathLayout;
     private ArithmeticsInterface calc;
 
-    @Override
     protected void doLayout() {
 
         path = new PathModel(5, 15, 5);
@@ -70,9 +79,61 @@ public class EmptyExecutor extends RealSimpleExerciseExecutor {
         }
     }
 
-    @Override
     protected double getCorrectness() {
         return score;
+    }
+
+    @Override
+    public void initialize(ResourceGiver localizer,
+            MathPathExerciseData exerciseData, MathPathSubmissionInfo oldSubm,
+            ExerciseMaterialManager materials, ExecutionSettings execSettings)
+            throws ExerciseException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void registerSubmitListener(
+            SubmissionListener<MathPathSubmissionInfo> submitListener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Component getView() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void shutdown() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void askReset() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void askSubmit(SubmissionType askedSubmType) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void registerExecutionStateChangeListener(
+            ExecutionStateChangeListener execStateListener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public ExecutionState getCurrentExecutionState() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
