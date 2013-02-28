@@ -2,6 +2,8 @@ package edu.vserver.exercises.mathpath;
 
 import java.util.ArrayList;
 
+import org.vaadin.jouni.animator.server.AnimatorProxy;
+
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -11,113 +13,112 @@ import com.vaadin.ui.Notification;
 
 public class PathLayout extends AbsoluteLayout {
 
-	private static final long serialVersionUID = 1L;
-	private final ArrayList<Button> currentOptions;
-	private Button correctOption;
-	
-	private final Label label;
-	private final Button middleButton;
+    private static final long serialVersionUID = 1L;
+    private final ArrayList<Button> currentOptions;
+    private Button correctOption;
 
-	public PathLayout() {
-		super();
+    private final Label label;
+    private final Button middleButton;
 
-		currentOptions = new ArrayList<Button>();
+    public PathLayout() {
+        super();
 
-		this.setWidth("100%");
-		this.setHeight("300px");
+        currentOptions = new ArrayList<Button>();
 
-		middleButton = new Button("9");
+        this.setWidth("100%");
+        this.setHeight("300px");
 
-		label = new Label("Temp");
-		addComponent(label);
-		addComponent(middleButton, "top:50%; right:50%");
+        middleButton = new Button("9");
 
-	}
+        label = new Label("Temp");
+        addComponent(label);
+        addComponent(middleButton, "top:50%; right:50%");
 
-	public void addOption(String string) {
-		Button b = new Button(string);
+        AnimatorProxy proxy = new AnimatorProxy();
+        this.addComponent(proxy);
 
-		// add a click listener for the new option
-		b.addClickListener(new ClickListener() {
-			@Override
-			public void buttonClick(ClickEvent event) {
-				
-				if (event.getButton() == correctOption) {
-					handleCorrectAnswer();
-				}
-				else {
-					handleWrongAnswer();
-					event.getButton().setEnabled(false);
-				}	
-			}
+    }
 
+    public void addOption(String string) {
+        Button b = new Button(string);
 
-		});
-		currentOptions.add(b);
-		updatePositions();
-	}
-	
-	private void handleWrongAnswer() {
-		Notification.show("Try again!");
-	}
+        // add a click listener for the new option
+        b.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
 
-	private void handleCorrectAnswer() {
-		Notification.show("Correct!");
-	}
+                if (event.getButton() == correctOption) {
+                    handleCorrectAnswer();
+                } else {
+                    handleWrongAnswer();
+                    event.getButton().setEnabled(false);
+                }
+            }
 
-	public void removeOption(Button b) {
-		removeComponent(b);
-		currentOptions.remove(b);
-		updatePositions();
-	}
+        });
+        currentOptions.add(b);
+        updatePositions();
+    }
 
-	private void updatePositions() {
-		// first remove old buttons, so we can reposition (there might be a
-		// better way to do it?)
-		for (Button b : currentOptions) {
-			removeComponent(b);
-		}
+    private void handleWrongAnswer() {
+        Notification.show("Try again!");
+    }
 
-		// calculate the vertical distance between buttons (in css %)
-		int heightIncrement = 100 / (currentOptions.size() + 1);
+    private void handleCorrectAnswer() {
+        Notification.show("Correct!");
+    }
 
-		for (int i = 0; i < currentOptions.size(); i++) {
-			// format the vertical alignment
-			String position = "top:" + heightIncrement * (i + 1)
-					+ "%; right:25%";
+    public void removeOption(Button b) {
+        removeComponent(b);
+        currentOptions.remove(b);
+        updatePositions();
+    }
 
-			addComponent(currentOptions.get(i), position);
+    private void updatePositions() {
+        // first remove old buttons, so we can reposition (there might be a
+        // better way to do it?)
+        for (Button b : currentOptions) {
+            removeComponent(b);
+        }
 
-		}
-	}
+        // calculate the vertical distance between buttons (in css %)
+        int heightIncrement = 100 / (currentOptions.size() + 1);
 
-	public void changeData(String s) {
-		label.setValue(s);
-	}
+        for (int i = 0; i < currentOptions.size(); i++) {
+            // format the vertical alignment
+            String position = "top:" + heightIncrement * (i + 1)
+                    + "%; right:25%";
 
-	public void setCorrectOption(String riddle) {
-		// find the correct option button and add a click listener to it
-		for (int i = 0; i < currentOptions.size(); i++) {
-			if (currentOptions.get(i).getCaption().equals(riddle)) {
-				
-				correctOption = currentOptions.get(i);
-				
-			}
-		}
-	}
+            addComponent(currentOptions.get(i), position);
 
-	public void setMiddleCaption(String caption) {
-		middleButton.setCaption(caption);
-	}
+        }
+    }
 
-	public void clearOptions() {
-		for (Button b : currentOptions) {
-			removeComponent(b);
-		}
-		currentOptions.clear();
+    public void changeData(String s) {
+        label.setValue(s);
+    }
 
-	}
-	
-	
+    public void setCorrectOption(String riddle) {
+        // find the correct option button and add a click listener to it
+        for (int i = 0; i < currentOptions.size(); i++) {
+            if (currentOptions.get(i).getCaption().equals(riddle)) {
+
+                correctOption = currentOptions.get(i);
+
+            }
+        }
+    }
+
+    public void setMiddleCaption(String caption) {
+        middleButton.setCaption(caption);
+    }
+
+    public void clearOptions() {
+        for (Button b : currentOptions) {
+            removeComponent(b);
+        }
+        currentOptions.clear();
+
+    }
 
 }
