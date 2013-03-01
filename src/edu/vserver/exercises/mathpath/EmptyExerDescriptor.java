@@ -14,11 +14,6 @@ import edu.vserver.standardutils.StandardIcon;
 public class EmptyExerDescriptor implements
         ExerciseTypeDescriptor<MathPathExerciseData, MathPathSubmissionInfo> {
 
-    private static final XmlEncHelper<MathPathExerciseData> xmlBeanWrapper = new XmlEncHelper<MathPathExerciseData>(
-            MathPathEncXmlHandler.class);
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = 4587736884427608942L;
 
     public static final EmptyExerDescriptor INSTANCE = new EmptyExerDescriptor();
@@ -36,7 +31,7 @@ public class EmptyExerDescriptor implements
     @Override
     public ExerciseXMLHandler<MathPathExerciseData> newExerciseXML() {
         // TODO Auto-generated method stub
-        return xmlBeanWrapper;
+        return MathPathXmlHandler.INSTANCE;
     }
 
     @Override

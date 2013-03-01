@@ -28,9 +28,11 @@ public class EmptyExecutor extends VerticalLayout implements
     private PathLayout pathLayout;
     private ArithmeticsInterface calc;
 
-    protected void doLayout() {
+    public EmptyExecutor() {}
+    
+    protected void doLayout(int min, int max, int amountOfOptions) {
 
-        path = new PathModel(5, 15, 5);
+        path = new PathModel(min, max, amountOfOptions);
         calc = new AdditionGenerator();
 
         VerticalLayout verticalLayout = new VerticalLayout();
@@ -47,9 +49,7 @@ public class EmptyExecutor extends VerticalLayout implements
 
             @Override
             public void buttonClick(ClickEvent event) {
-                path.generateNewAnswers();
-                generateRiddles();
-                score = 1.0;
+            	reset();
             }
         });
 
@@ -88,7 +88,7 @@ public class EmptyExecutor extends VerticalLayout implements
             MathPathExerciseData exerciseData, MathPathSubmissionInfo oldSubm,
             ExerciseMaterialManager materials, ExecutionSettings execSettings)
             throws ExerciseException {
-        // TODO Auto-generated method stub
+        doLayout(exerciseData.getMin(), exerciseData.getMax(), exerciseData.getAmountOfOptions());
 
     }
 
@@ -102,7 +102,7 @@ public class EmptyExecutor extends VerticalLayout implements
     @Override
     public Component getView() {
         // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
@@ -113,8 +113,14 @@ public class EmptyExecutor extends VerticalLayout implements
 
     @Override
     public void askReset() {
-        // TODO Auto-generated method stub
-
+    	reset();
+    }
+    
+    private void reset() {
+    	//TODO: resetoi oikeasti joskus
+    	path.generateNewAnswers();
+        generateRiddles();
+        score = 1.0;
     }
 
     @Override
