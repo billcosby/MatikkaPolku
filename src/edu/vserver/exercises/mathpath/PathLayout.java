@@ -2,8 +2,6 @@ package edu.vserver.exercises.mathpath;
 
 import java.util.ArrayList;
 
-import org.vaadin.jouni.animator.server.AnimatorProxy;
-
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -16,13 +14,15 @@ public class PathLayout extends AbsoluteLayout {
     private static final long serialVersionUID = 1L;
     private final ArrayList<Button> currentOptions;
     private Button correctOption;
+    private MathPathExecutor executor;
 
-    private final Label label;
+   
     private final Button middleButton;
 
-    public PathLayout() {
+    public PathLayout(MathPathExecutor executor) {
         super();
 
+        this.executor = executor;
         currentOptions = new ArrayList<Button>();
 
         this.setWidth("100%");
@@ -30,12 +30,8 @@ public class PathLayout extends AbsoluteLayout {
 
         middleButton = new Button("9");
 
-        label = new Label("Temp");
-        addComponent(label);
+        
         addComponent(middleButton, "top:50%; right:50%");
-
-        AnimatorProxy proxy = new AnimatorProxy();
-        this.addComponent(proxy);
 
     }
 
@@ -62,10 +58,12 @@ public class PathLayout extends AbsoluteLayout {
 
     private void handleWrongAnswer() {
         Notification.show("Try again!");
+        executor.handleWrongAnswer();
     }
 
     private void handleCorrectAnswer() {
         Notification.show("Correct!");
+        executor.handleCorrectAnswer();
     }
 
     public void removeOption(Button b) {
@@ -92,10 +90,6 @@ public class PathLayout extends AbsoluteLayout {
             addComponent(currentOptions.get(i), position);
 
         }
-    }
-
-    public void changeData(String s) {
-        label.setValue(s);
     }
 
     public void setCorrectOption(String riddle) {

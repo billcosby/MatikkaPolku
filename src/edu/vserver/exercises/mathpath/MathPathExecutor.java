@@ -18,17 +18,21 @@ import edu.vserver.exercises.model.ResourceGiver;
 import edu.vserver.exercises.model.SubmissionListener;
 import edu.vserver.exercises.model.SubmissionType;
 
-public class EmptyExecutor extends VerticalLayout implements
+public class MathPathExecutor extends VerticalLayout implements
         Executor<MathPathExerciseData, MathPathSubmissionInfo> {
 
     private static final long serialVersionUID = 645228793345434162L;
 
-    private double score = 0.0;
+    private int correctAnswers;
+    private int wrongAnswers;
+    
     private PathModel path;
     private PathLayout pathLayout;
     private ArithmeticsInterface calc;
+    
+    Label results;
 
-    public EmptyExecutor() {}
+    public MathPathExecutor() {}
     
     protected void doLayout(int min, int max, int amountOfOptions) {
 
@@ -36,28 +40,20 @@ public class EmptyExecutor extends VerticalLayout implements
         calc = new AdditionGenerator();
 
         VerticalLayout verticalLayout = new VerticalLayout();
-
-        Button pushThis = new Button("push this");
-        pathLayout = new PathLayout();
-
-        Label label2 = new Label("t�h�n tulee alalaita");
+        
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        
+        pathLayout = new PathLayout(this);
+        
+        results = new Label("Correct: " + correctAnswers + " Wrong: "+ wrongAnswers);
 
         generateRiddles();
 
-        pushThis.addClickListener(new Button.ClickListener() {
-            private static final long serialVersionUID = 2906960442004272295L;
-
-            @Override
-            public void buttonClick(ClickEvent event) {
-            	reset();
-            }
-        });
-
         verticalLayout.setWidth("90%");
 
-        verticalLayout.addComponent(pushThis);
         verticalLayout.addComponent(pathLayout);
-        verticalLayout.addComponent(label2);
+        verticalLayout.addComponent(results);
 
         this.addComponent(verticalLayout);
 
@@ -67,7 +63,11 @@ public class EmptyExecutor extends VerticalLayout implements
                         | Bits.ALIGNMENT_HORIZONTAL_CENTER));
     }
 
-    private void generateRiddles() {
+    private void updateScore() {
+    	results.setValue("Correct: " + correctAnswers + " Wrong: "+ wrongAnswers);
+	}
+
+	private void generateRiddles() {
         pathLayout.clearOptions();
         pathLayout.setMiddleCaption("" + path.getCorrectAnswer());
         for (int i = 0; i < path.getLength(); i++) {
@@ -79,9 +79,7 @@ public class EmptyExecutor extends VerticalLayout implements
         }
     }
 
-    protected double getCorrectness() {
-        return score;
-    }
+
 
     @Override
     public void initialize(ResourceGiver localizer,
@@ -117,10 +115,14 @@ public class EmptyExecutor extends VerticalLayout implements
     }
     
     private void reset() {
-    	//TODO: resetoi oikeasti joskus
+    	
     	path.generateNewAnswers();
         generateRiddles();
-        score = 1.0;
+        
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        
+        updateScore();
     }
 
     @Override
@@ -141,5 +143,18 @@ public class EmptyExecutor extends VerticalLayout implements
         // TODO Auto-generated method stub
         return null;
     }
+
+	public void handleWrongAnswer() {
+		wrongAnswers++;
+		updateScore();
+	}
+
+	public void handleCorrectAnswer() {	
+		correctAnswers++;
+		updateScore();
+		
+		path.generateNewAnswers();
+		generateRiddles();
+	}
 
 }

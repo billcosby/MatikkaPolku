@@ -19,8 +19,8 @@ public class EmptyExerDescriptor implements
     public static final EmptyExerDescriptor INSTANCE = new EmptyExerDescriptor();
 
     @Override
-    public EmptyExecutor newExerciseExecutor() {
-        return new EmptyExecutor();
+    public MathPathExecutor newExerciseExecutor() {
+        return new MathPathExecutor();
     }
 
     @Override

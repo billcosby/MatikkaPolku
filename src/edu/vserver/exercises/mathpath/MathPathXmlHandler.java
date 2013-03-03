@@ -1,7 +1,5 @@
 package edu.vserver.exercises.mathpath;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,10 +13,8 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import edu.vserver.exercises.helpers.XMLHelper;
-import edu.vserver.exercises.helpers.XmlEncHelper.BeanExerciseDataWrapper;
 import edu.vserver.exercises.model.ExerciseException;
 import edu.vserver.exercises.model.ExerciseXMLHandler;
-import edu.vserver.exercises.template.TemplateExerciseData;
 
 public class MathPathXmlHandler implements
 ExerciseXMLHandler<MathPathExerciseData> {
