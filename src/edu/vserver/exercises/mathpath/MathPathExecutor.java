@@ -6,6 +6,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.ProgressIndicator;
 import com.vaadin.ui.VerticalLayout;
 
 import edu.vserver.exercises.model.ExecutionSettings;
@@ -30,17 +31,21 @@ public class MathPathExecutor extends VerticalLayout implements
     private PathLayout pathLayout;
     private ArithmeticsInterface calc;
     
-    Label results;
+    private ProgressIndicator progressBar;
+    private Label results;
+
+	private int pathLength;
 
     public MathPathExecutor() {}
     
-    protected void doLayout(int min, int max, int amountOfOptions) {
-
+    protected void doLayout(int min, int max, int amountOfOptions, int pathLength) {
+    	
         path = new PathModel(min, max, amountOfOptions);
         calc = new AdditionGenerator();
 
         VerticalLayout verticalLayout = new VerticalLayout();
         
+        this.pathLength = pathLength;
         correctAnswers = 0;
         wrongAnswers = 0;
         
@@ -49,12 +54,16 @@ public class MathPathExecutor extends VerticalLayout implements
         results = new Label("Correct: " + correctAnswers + " Wrong: "+ wrongAnswers);
 
         generateRiddles();
-
+        
+        progressBar = new ProgressIndicator();
+        progressBar.setIndeterminate(false);
+        progressBar.setSizeFull();
+        progressBar.setHeight("20px");
+        
         verticalLayout.setWidth("90%");
-
+        verticalLayout.addComponent(progressBar);
         verticalLayout.addComponent(pathLayout);
         verticalLayout.addComponent(results);
-
         this.addComponent(verticalLayout);
 
         // this centers the whole thing
@@ -65,8 +74,12 @@ public class MathPathExecutor extends VerticalLayout implements
 
     private void updateScore() {
     	results.setValue("Correct: " + correctAnswers + " Wrong: "+ wrongAnswers);
+    	
 	}
 
+    /*
+     * Clears the possible old options and breaks down our 
+     */
 	private void generateRiddles() {
         pathLayout.clearOptions();
         pathLayout.setMiddleCaption("" + path.getCorrectAnswer());
@@ -86,7 +99,8 @@ public class MathPathExecutor extends VerticalLayout implements
             MathPathExerciseData exerciseData, MathPathSubmissionInfo oldSubm,
             ExerciseMaterialManager materials, ExecutionSettings execSettings)
             throws ExerciseException {
-        doLayout(exerciseData.getMin(), exerciseData.getMax(), exerciseData.getAmountOfOptions());
+        doLayout(exerciseData.getMin(), exerciseData.getMax(), exerciseData.getAmountOfOptions(),
+        		exerciseData.getPathLength());
 
     }
 
@@ -99,7 +113,6 @@ public class MathPathExecutor extends VerticalLayout implements
 
     @Override
     public Component getView() {
-        // TODO Auto-generated method stub
         return this;
     }
 
@@ -145,6 +158,7 @@ public class MathPathExecutor extends VerticalLayout implements
     }
 
 	public void handleWrongAnswer() {
+		
 		wrongAnswers++;
 		updateScore();
 	}
@@ -155,6 +169,12 @@ public class MathPathExecutor extends VerticalLayout implements
 		
 		path.generateNewAnswers();
 		generateRiddles();
+		
+		progressBar.setValue((float) correctAnswers / pathLength);
+		
+		if (correctAnswers >= pathLength) {
+			pathLayout.clearOptions();
+		}
 	}
 
 }

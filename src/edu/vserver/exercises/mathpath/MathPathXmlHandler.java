@@ -33,6 +33,7 @@ ExerciseXMLHandler<MathPathExerciseData> {
 			 root.setAttribute("amountOfOptions", etd.getAmountOfOptions() + "");
 			 root.setAttribute("minValue", etd.getMin() + "");
 			 root.setAttribute("maxValue", etd.getMax() + "");
+			 root.setAttribute("pathLength", etd.getPathLength() + "");
 			 
 			 result = XMLHelper.xmlToInputStream(doc);
 			 
@@ -70,12 +71,14 @@ ExerciseXMLHandler<MathPathExerciseData> {
 					"amountOfOptions");
 			String minAttribute = doc.getDocumentElement().getAttribute("minValue");
 			String maxAttribute = doc.getDocumentElement().getAttribute("maxValue");
+			String lengthAttribute = doc.getDocumentElement().getAttribute("pathLength");
 			
 			int parsedAmount = Integer.parseInt(amountAttribute);
 			int parsedMin = Integer.parseInt(minAttribute);
 			int parsedMax = Integer.parseInt(maxAttribute);
+			int parsedLength = Integer.parseInt(lengthAttribute);
 
-			res = new MathPathExerciseData(parsedMin, parsedMax, parsedAmount);
+			res = new MathPathExerciseData(parsedMin, parsedMax, parsedAmount, parsedLength);
 
 		} catch (ParserConfigurationException e) {
 			throw new ExerciseException(

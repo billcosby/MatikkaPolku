@@ -7,11 +7,13 @@ public class MathPathExerciseData implements ExerciseData {
 	private int amountOfOptions;
 	private int min;
 	private int max;
+	private int pathLength;
 	
-	public MathPathExerciseData(int min, int max, int amountOfOptions) {
+	public MathPathExerciseData(int min, int max, int amountOfOptions, int pathLength) {
 		this.amountOfOptions = amountOfOptions;
 		this.min = min;
 		this.max = max;
+		this.pathLength = pathLength;
 	}
 	
     @Override
@@ -28,6 +30,10 @@ public class MathPathExerciseData implements ExerciseData {
 	}
 	public int getMax(){
 		return max;
+	}
+
+	public int getPathLength() {
+		return pathLength;
 	}
 
     

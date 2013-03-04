@@ -28,7 +28,7 @@ public class PathLayout extends AbsoluteLayout {
         this.setWidth("100%");
         this.setHeight("300px");
 
-        middleButton = new Button("9");
+        middleButton = new Button("");
 
         
         addComponent(middleButton, "top:50%; right:50%");
@@ -46,8 +46,8 @@ public class PathLayout extends AbsoluteLayout {
                 if (event.getButton() == correctOption) {
                     handleCorrectAnswer();
                 } else {
-                    handleWrongAnswer();
-                    event.getButton().setEnabled(false);
+                    handleWrongAnswer(event.getButton());
+                    
                 }
             }
 
@@ -56,7 +56,9 @@ public class PathLayout extends AbsoluteLayout {
         updatePositions();
     }
 
-    private void handleWrongAnswer() {
+    private void handleWrongAnswer(Button button) {
+    	button.setEnabled(false);
+     	
         Notification.show("Try again!");
         executor.handleWrongAnswer();
     }

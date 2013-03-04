@@ -22,7 +22,7 @@ public class MathPathEditor extends VerticalLayout implements
     private TextField amountOfOptionsField;
     private TextField minField;
     private TextField maxField;
-    
+    private TextField pathLengthField;
     
     private final SaveListenerHelper<MathPathExerciseData> saveListeners = new SaveListenerHelper<MathPathExerciseData>();
 
@@ -52,6 +52,7 @@ public class MathPathEditor extends VerticalLayout implements
     	amountOfOptionsField = new TextField("Amount of options presented");
     	minField = new TextField("Minimum value");
     	maxField = new TextField("Maximum value");
+    	pathLengthField = new TextField("Path length");
     	
     	
     	save.addClickListener(new ClickListener(){
@@ -66,6 +67,7 @@ public class MathPathEditor extends VerticalLayout implements
     	addComponent(amountOfOptionsField);
     	addComponent(minField);
     	addComponent(maxField);
+    	addComponent(pathLengthField);
         addComponent(save);
     }
 
@@ -73,7 +75,7 @@ public class MathPathEditor extends VerticalLayout implements
 		return new MathPathExerciseData(
 				Integer.parseInt(minField.getValue()),
 				Integer.parseInt(maxField.getValue()),
-				Integer.parseInt(amountOfOptionsField.getValue()));
-    	
+				Integer.parseInt(amountOfOptionsField.getValue()),
+				Integer.parseInt(pathLengthField.getValue()));	
     }
 }
