@@ -16,6 +16,12 @@
 			<param-name>UI</param-name>
 			<param-value>edu.vserver.exercises.stub.test.VilleexercisestubTestUI</param-value>
 		</init-param>
+		<init-param>
+			<description>
+			Application widgetset</description>
+			<param-name>widgetset</param-name>
+			<param-value>edu.vserver.exercises.stub.test.widgetset.VexerstubWidgetset</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Vexerstub Application</servlet-name>
