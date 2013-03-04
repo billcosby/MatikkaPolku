@@ -18,7 +18,7 @@ public class AdditionGenerator implements ArithmeticsInterface {
 		Random rnd = new Random();
 
 		int slicer;
-		int slicedResult = 1;
+		int slicedResult = 0;
 		int slicerSum = 0;
 
 		// String equation = "" + slicer + " + " + (result - slicer);
@@ -27,17 +27,22 @@ public class AdditionGenerator implements ArithmeticsInterface {
 
 		for (int i = 1; i < amountOfNumbers; i++) {
 
-			slicer = rnd.nextInt(result - 1) + slicedResult;
-			slicerSum += slicer;
-			if (i == amountOfNumbers - 1) {
-				equation += slicer + " + " + (result - slicerSum);
-			} else {
-				equation += slicer + " + ";
-			}
-
-			slicedResult = slicer;
+			/*
+			 * slicer = rnd.nextInt(result - slicedResult - 1) + slicedResult +
+			 * 1; slicerSum += slicer - slicedResult;
+			 * 
+			 * if (i == amountOfNumbers - 1) { equation += slicer + " + " +
+			 * (result - slicerSum); } else { equation += slicer + " + "; }
+			 * 
+			 * slicedResult = slicer;
+			 */
 		}
 		return equation;
+	}
+
+	private int getRandomSlicerBetween(int min, int max) {
+		int mid = (min + max) / 2;
+		return mid;
 	}
 
 }
