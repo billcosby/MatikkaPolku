@@ -10,7 +10,7 @@ public class MultiplicationGenerator implements ArithmeticsInterface {
 		Random rnd = new Random();
 		String riddle = "";
 		
-		int multiplier = rnd.nextInt((int) (result/2)-2) +2;
+		int multiplier = rnd.nextInt((int) (result/2+1)-2) +2;
 		int remainder = result % multiplier;
 		int multiplier2 = (result-remainder) / multiplier;
 		

@@ -38,7 +38,7 @@ public class MathPathExecutor extends VerticalLayout implements
 			int pathLength) {
 
 		path = new PathModel(min, max, amountOfOptions);
-		calc = new AdditionGenerator(3);
+		calc = new MultiplicationGenerator();
 
 		VerticalLayout verticalLayout = new VerticalLayout();
 

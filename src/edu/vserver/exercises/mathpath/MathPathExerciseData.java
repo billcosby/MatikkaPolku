@@ -36,6 +36,4 @@ public class MathPathExerciseData implements ExerciseData {
 		return pathLength;
 	}
 
-    
-
 }
