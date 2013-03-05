@@ -10,7 +10,7 @@ public class PathModel {
 
     private int min, max, amountOfOptions;
 
-    private int correctAnswer;
+    private int correctAnswer = 0;
 
     private static Random rnd = new Random();
 
@@ -27,7 +27,10 @@ public class PathModel {
     }
 
     private void generateAnswers() {
-        correctAnswer = rnd.nextInt(max - min + 1) + min;
+        if (correctAnswer == 0) {
+        	correctAnswer = rnd.nextInt(max - min + 1) + min;
+        }
+        
         list.add(correctAnswer);
         generateWrongAnswers(correctAnswer);
 
@@ -60,6 +63,10 @@ public class PathModel {
         list.clear();
 
         generateAnswers();
+    }
+    
+    public void resetCorrectAnswer() {
+    	correctAnswer = 0;
     }
 
 }

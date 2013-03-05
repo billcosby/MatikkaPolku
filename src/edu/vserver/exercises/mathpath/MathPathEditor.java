@@ -37,7 +37,18 @@ public class MathPathEditor extends VerticalLayout implements
 			MathPathExerciseData oldData,
 			GeneralExerciseInfoEditor genExerInfoEditor,
 			EditorMaterialManager materialManager) throws ExerciseException {
+
 		doLayout();
+		if (oldData != null) {
+			setDefaultData(oldData);
+		}
+	}
+
+	private void setDefaultData(MathPathExerciseData oldData) {
+		amountOfOptionsField.setValue(oldData.getAmountOfOptions() + "");
+		minField.setValue(oldData.getMin() + "");
+		maxField.setValue(oldData.getMax() + "");
+		pathLengthField.setValue(oldData.getPathLength() +"");
 	}
 
 	@Override
@@ -48,7 +59,7 @@ public class MathPathEditor extends VerticalLayout implements
 	}
 
 	private void doLayout() {
-		save = new Button("saveee");
+		save = new Button("Save");
 		amountOfOptionsField = new TextField("Amount of options presented");
 		minField = new TextField("Minimum value");
 		maxField = new TextField("Maximum value");

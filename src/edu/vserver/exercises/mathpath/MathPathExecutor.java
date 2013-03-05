@@ -34,11 +34,12 @@ public class MathPathExecutor extends VerticalLayout implements
 
 	private int pathLength;
 
+	
 	protected void doLayout(int min, int max, int amountOfOptions,
 			int pathLength) {
 
 		path = new PathModel(min, max, amountOfOptions);
-		calc = new MultiplicationGenerator();
+		calc = new AdditionGenerator(3);
 
 		VerticalLayout verticalLayout = new VerticalLayout();
 
@@ -125,12 +126,13 @@ public class MathPathExecutor extends VerticalLayout implements
 	}
 
 	private void reset() {
-
+		path.resetCorrectAnswer();
 		path.generateNewAnswers();
 		generateRiddles();
 
 		correctAnswers = 0;
 		wrongAnswers = 0;
+		progressBar.setValue(0f);
 
 		updateScore();
 	}
