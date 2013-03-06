@@ -87,7 +87,7 @@ public class PathLayout extends AbsoluteLayout {
         for (int i = 0; i < currentOptions.size(); i++) {
             // format the vertical alignment
             String position = "top:" + heightIncrement * (i + 1)
-                    + "%; right:25%";
+                    + "%; right:20%";
 
             addComponent(currentOptions.get(i), position);
 

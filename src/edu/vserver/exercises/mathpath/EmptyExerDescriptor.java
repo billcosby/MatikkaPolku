@@ -25,7 +25,7 @@ public class EmptyExerDescriptor implements
 
     @Override
     public String getTypeName(ResourceGiver localizer) {
-        return "EmptyTestExercise";
+        return "Math Path Exercise";
     }
 
     @Override

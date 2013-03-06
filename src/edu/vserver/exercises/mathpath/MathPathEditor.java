@@ -5,15 +5,20 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 import edu.vserver.exercises.helpers.SaveListenerHelper;
+import edu.vserver.exercises.helpers.TestingExecutionSettings;
 import edu.vserver.exercises.model.Editor;
 import edu.vserver.exercises.model.EditorMaterialManager;
 import edu.vserver.exercises.model.ExerciseException;
 import edu.vserver.exercises.model.ExerciseSaveListener;
 import edu.vserver.exercises.model.GeneralExerciseInfoEditor;
 import edu.vserver.exercises.model.ResourceGiver;
+import edu.vserver.exercises.template.TemplateExecutor;
+import edu.vserver.standardutils.StandardUIConstants;
 
 public class MathPathEditor extends VerticalLayout implements
 		Editor<MathPathExerciseData> {
@@ -25,6 +30,7 @@ public class MathPathEditor extends VerticalLayout implements
 	private TextField pathLengthField;
 
 	private final SaveListenerHelper<MathPathExerciseData> saveListeners = new SaveListenerHelper<MathPathExerciseData>();
+
 
 	@Override
 	public Component getView() {
@@ -59,7 +65,9 @@ public class MathPathEditor extends VerticalLayout implements
 	}
 
 	private void doLayout() {
+		
 		save = new Button("Save");
+		
 		amountOfOptionsField = new TextField("Amount of options presented");
 		minField = new TextField("Minimum value");
 		maxField = new TextField("Maximum value");
@@ -73,6 +81,7 @@ public class MathPathEditor extends VerticalLayout implements
 			}
 
 		});
+
 
 		addComponent(amountOfOptionsField);
 		addComponent(minField);

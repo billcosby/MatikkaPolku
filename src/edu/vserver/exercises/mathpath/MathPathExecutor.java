@@ -7,6 +7,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.ProgressIndicator;
 import com.vaadin.ui.VerticalLayout;
 
+import edu.vserver.exercises.helpers.ExerciseExecutionHelper;
 import edu.vserver.exercises.model.ExecutionSettings;
 import edu.vserver.exercises.model.ExecutionState;
 import edu.vserver.exercises.model.ExecutionStateChangeListener;
@@ -16,32 +17,41 @@ import edu.vserver.exercises.model.ExerciseMaterialManager;
 import edu.vserver.exercises.model.ResourceGiver;
 import edu.vserver.exercises.model.SubmissionListener;
 import edu.vserver.exercises.model.SubmissionType;
+import edu.vserver.exercises.template.TemplateSubmissionInfo;
 
 public class MathPathExecutor extends VerticalLayout implements
 		Executor<MathPathExerciseData, MathPathSubmissionInfo> {
-
+	
 	private static final long serialVersionUID = 645228793345434162L;
+	
+	private final ExerciseExecutionHelper<MathPathSubmissionInfo> execHelper =
+			new ExerciseExecutionHelper<MathPathSubmissionInfo>();
 
+	// keep track of answers
 	private int correctAnswers;
 	private int wrongAnswers;
 
+	// holds the answers
 	private PathModel path;
+	
+	// the component where we show the path
 	private PathLayout pathLayout;
+	
+	// the "number cruncher" which generates equations from a given result
 	private ArithmeticsInterface calc;
 
 	private ProgressIndicator progressBar;
 	private Label results;
 
+	// how many correct answers is needed to complete the exercise
 	private int pathLength;
 
 	
 	protected void doLayout(int min, int max, int amountOfOptions,
 			int pathLength) {
-
+		
 		path = new PathModel(min, max, amountOfOptions);
 		calc = new AdditionGenerator(3);
-
-		VerticalLayout verticalLayout = new VerticalLayout();
 
 		this.pathLength = pathLength;
 		correctAnswers = 0;
@@ -56,29 +66,24 @@ public class MathPathExecutor extends VerticalLayout implements
 
 		progressBar = new ProgressIndicator();
 		progressBar.setIndeterminate(false);
-		progressBar.setSizeFull();
 		progressBar.setHeight("20px");
+		progressBar.setSizeFull();
+		
 
-		verticalLayout.setWidth("90%");
-		verticalLayout.addComponent(progressBar);
-		verticalLayout.addComponent(pathLayout);
-		verticalLayout.addComponent(results);
-		this.addComponent(verticalLayout);
+		setWidth("640px");
+		addComponent(progressBar);
+		addComponent(pathLayout);
+		addComponent(results);
 
-		// this centers the whole thing
-		setComponentAlignment(verticalLayout, new Alignment(
-				Bits.ALIGNMENT_VERTICAL_CENTER
-						| Bits.ALIGNMENT_HORIZONTAL_CENTER));
 	}
 
 	private void updateScore() {
 		results.setValue("Correct: " + correctAnswers + " Wrong: "
 				+ wrongAnswers);
-
 	}
 
 	/*
-	 * Clears the possible old options and breaks down our
+	 * Clears the possible old options and creates new ones
 	 */
 	private void generateRiddles() {
 		pathLayout.clearOptions();
@@ -105,7 +110,7 @@ public class MathPathExecutor extends VerticalLayout implements
 	@Override
 	public void registerSubmitListener(
 			SubmissionListener<MathPathSubmissionInfo> submitListener) {
-		// TODO Auto-generated method stub
+		execHelper.registerSubmitListener(submitListener);
 
 	}
 
@@ -139,21 +144,20 @@ public class MathPathExecutor extends VerticalLayout implements
 
 	@Override
 	public void askSubmit(SubmissionType askedSubmType) {
-		// TODO Auto-generated method stub
-
+		execHelper.informOnlySubmit(correctAnswers/(wrongAnswers + correctAnswers), 
+				new MathPathSubmissionInfo(correctAnswers, wrongAnswers), askedSubmType, null);
 	}
 
 	@Override
 	public void registerExecutionStateChangeListener(
 			ExecutionStateChangeListener execStateListener) {
-		// TODO Auto-generated method stub
+		execHelper.registerExerciseExecutionStateListener(execStateListener);
 
 	}
 
 	@Override
 	public ExecutionState getCurrentExecutionState() {
-		// TODO Auto-generated method stub
-		return null;
+		return execHelper.getState();
 	}
 
 	public void handleWrongAnswer() {
