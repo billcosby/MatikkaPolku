@@ -1,3 +1,4 @@
+/* the middle button with correct answer */
 .mathpath-middle, 
 .mathpath-middle:focus,
 .mathpath-middle:active {
@@ -7,6 +8,7 @@
 
 }
 
+/* the presented option buttons */
 .mathpath-option,
 .mathpath-option:focus,
 .mathpath-option:active {
@@ -22,3 +24,9 @@
  
 /* Progress indication element on top of the base. */
 .v-progressindicator-wrapper div {}
+
+
+.path-layout {
+	background-color: rgb(240,250,255);
+	border: 1px solid rgb(220,220,220);
+}

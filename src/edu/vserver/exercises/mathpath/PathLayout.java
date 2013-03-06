@@ -33,7 +33,7 @@ public class PathLayout extends AbsoluteLayout {
         middleButton.setStyleName("mathpath-middle");
         
         addComponent(middleButton, "top:50%; right:50%");
-
+        this.setStyleName("path-layout");
     }
 
     
