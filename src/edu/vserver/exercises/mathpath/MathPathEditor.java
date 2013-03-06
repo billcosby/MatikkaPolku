@@ -55,6 +55,7 @@ public class MathPathEditor extends VerticalLayout implements
 		minField.setValue(oldData.getMin() + "");
 		maxField.setValue(oldData.getMax() + "");
 		pathLengthField.setValue(oldData.getPathLength() +"");
+		
 	}
 
 	@Override
