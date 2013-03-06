@@ -1,0 +1,24 @@
+.mathpath-middle, 
+.mathpath-middle:focus,
+.mathpath-middle:active {
+	background-color: rgb(161, 255, 161);
+	font-size: 130%;
+	
+
+}
+
+.mathpath-option,
+.mathpath-option:focus,
+.mathpath-option:active {
+	background-color: rgb(161, 161, 255);
+	font-size: 130%;
+
+}
+
+/* Base element. */
+.v-progressindicator-indicator {
+	background-color: rgb(200, 255, 100);
+}
+ 
+/* Progress indication element on top of the base. */
+.v-progressindicator-wrapper div {}

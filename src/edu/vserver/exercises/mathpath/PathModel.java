@@ -14,6 +14,7 @@ public class PathModel {
 
 	private static Random rnd = new Random();
 
+	
 	/*
 	 * @.pre amountOfOptions > 0
 	 */

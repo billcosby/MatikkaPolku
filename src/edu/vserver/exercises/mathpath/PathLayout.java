@@ -6,6 +6,7 @@ import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 
@@ -29,14 +30,16 @@ public class PathLayout extends AbsoluteLayout {
         this.setHeight("300px");
 
         middleButton = new Button("");
-
+        middleButton.setStyleName("mathpath-middle");
         
         addComponent(middleButton, "top:50%; right:50%");
 
     }
 
+    
     public void addOption(String string) {
         Button b = new Button(string);
+        b.addStyleName("mathpath-option");
 
         // add a click listener for the new option
         b.addClickListener(new ClickListener() {
@@ -87,7 +90,7 @@ public class PathLayout extends AbsoluteLayout {
         for (int i = 0; i < currentOptions.size(); i++) {
             // format the vertical alignment
             String position = "top:" + heightIncrement * (i + 1)
-                    + "%; right:20%";
+                    + "%; right:10%";
 
             addComponent(currentOptions.get(i), position);
 

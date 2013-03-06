@@ -17,6 +17,7 @@ public class AdditionGenerator implements ArithmeticsInterface {
 
 		Random rnd = new Random();
 
+		
 //		int slicer;
 //		int slicedResult = 0;
 //		int slicerSum = 0;

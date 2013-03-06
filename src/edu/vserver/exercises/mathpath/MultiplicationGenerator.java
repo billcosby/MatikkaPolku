@@ -16,6 +16,7 @@ public class MultiplicationGenerator implements ArithmeticsInterface {
 		
 		riddle = multiplier + " * " + multiplier2;
 		
+		
 		if (remainder != 0) {
 			riddle = riddle + " + " + remainder;
 		}

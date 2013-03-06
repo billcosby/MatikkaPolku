@@ -58,6 +58,7 @@ public class EmptyExerDescriptor implements
         return null;
     }
 
+    
     @Override
     public SubmissionVisualizer<MathPathExerciseData, MathPathSubmissionInfo> newSubmissionVisualizer() {
         // TODO Auto-generated method stub
