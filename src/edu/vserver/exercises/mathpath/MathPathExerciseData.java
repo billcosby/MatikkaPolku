@@ -20,6 +20,7 @@ public class MathPathExerciseData implements ExerciseData {
 		this.isRandomGenerated = isRandomGenerated;
 		this.inputAnswer = inputAnswer;
 	}
+	
 
 	@Override
 	public int getRevision() {

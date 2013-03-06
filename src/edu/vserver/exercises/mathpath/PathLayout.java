@@ -36,6 +36,7 @@ public class PathLayout extends AbsoluteLayout {
 
     }
 
+    
     public void addOption(String string) {
         Button b = new Button(string);
         b.addStyleName("mathpath-option");

@@ -72,6 +72,7 @@ public class MathPathExecutor extends VerticalLayout implements
 
 	}
 
+	
 	private void updateScore() {
 		results.setValue("Correct: " + correctAnswers + " Wrong: "
 				+ wrongAnswers);

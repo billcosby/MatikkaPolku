@@ -30,6 +30,7 @@ public class MathPathXmlHandler implements
 			Element root = doc.createElement("mathpath-exercise");
 			doc.appendChild(root);
 
+			
 			root.setAttribute("amountOfOptions", etd.getAmountOfOptions() + "");
 			root.setAttribute("minValue", etd.getMin() + "");
 			root.setAttribute("maxValue", etd.getMax() + "");

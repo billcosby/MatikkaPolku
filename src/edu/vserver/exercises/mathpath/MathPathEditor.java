@@ -50,6 +50,7 @@ public class MathPathEditor extends VerticalLayout implements
 			setDefaultData(oldData);
 		}
 	}
+	
 
 	private void setDefaultData(MathPathExerciseData oldData) {
 		amountOfOptionsField.setValue(oldData.getAmountOfOptions() + "");
