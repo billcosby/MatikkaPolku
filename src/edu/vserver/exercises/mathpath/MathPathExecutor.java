@@ -62,9 +62,8 @@ public class MathPathExecutor extends VerticalLayout implements
 
 		progressBar = new ProgressIndicator();
 		progressBar.setIndeterminate(false);
-		
 		progressBar.setWidth("540px");
-		//progressBar.setSizeFull();
+		
 
 		setWidth("540px");
 		addComponent(progressBar);
