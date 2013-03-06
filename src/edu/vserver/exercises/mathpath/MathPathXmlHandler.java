@@ -17,42 +17,42 @@ import edu.vserver.exercises.model.ExerciseException;
 import edu.vserver.exercises.model.ExerciseXMLHandler;
 
 public class MathPathXmlHandler implements
-ExerciseXMLHandler<MathPathExerciseData> {
+		ExerciseXMLHandler<MathPathExerciseData> {
 
 	public static final MathPathXmlHandler INSTANCE = new MathPathXmlHandler();
 
 	@Override
 	public InputStream save(MathPathExerciseData etd) throws ExerciseException {
-		 InputStream result = null;
-		 
-		 try {
-			 Document doc = XMLHelper.createEmptyDocument();
-			 Element root = doc.createElement("mathpath-exercise");
-			 doc.appendChild(root);
-			 
-			 root.setAttribute("amountOfOptions", etd.getAmountOfOptions() + "");
-			 root.setAttribute("minValue", etd.getMin() + "");
-			 root.setAttribute("maxValue", etd.getMax() + "");
-			 root.setAttribute("pathLength", etd.getPathLength() + "");
-			 
-			 result = XMLHelper.xmlToInputStream(doc);
-			 
-		 } catch (ParserConfigurationException e) {
-				throw new ExerciseException(
-						ExerciseException.ErrorType.XML_WRITE_ERROR, e);
-			} catch (TransformerConfigurationException e) {
-				throw new ExerciseException(
-						ExerciseException.ErrorType.XML_WRITE_ERROR, e);
-			} catch (TransformerException e) {
-				throw new ExerciseException(
-						ExerciseException.ErrorType.XML_WRITE_ERROR, e);
-			} catch (TransformerFactoryConfigurationError e) {
-				throw new ExerciseException(
-						ExerciseException.ErrorType.XML_WRITE_ERROR, e);
-			}
-		
-		
-		
+		InputStream result = null;
+
+		try {
+			Document doc = XMLHelper.createEmptyDocument();
+			Element root = doc.createElement("mathpath-exercise");
+			doc.appendChild(root);
+
+			root.setAttribute("amountOfOptions", etd.getAmountOfOptions() + "");
+			root.setAttribute("minValue", etd.getMin() + "");
+			root.setAttribute("maxValue", etd.getMax() + "");
+			root.setAttribute("pathLength", etd.getPathLength() + "");
+			root.setAttribute("isRandomGen", etd.getRandomGenerated() + "");
+			root.setAttribute("answerValue", etd.getAnswer() + "");
+
+			result = XMLHelper.xmlToInputStream(doc);
+
+		} catch (ParserConfigurationException e) {
+			throw new ExerciseException(
+					ExerciseException.ErrorType.XML_WRITE_ERROR, e);
+		} catch (TransformerConfigurationException e) {
+			throw new ExerciseException(
+					ExerciseException.ErrorType.XML_WRITE_ERROR, e);
+		} catch (TransformerException e) {
+			throw new ExerciseException(
+					ExerciseException.ErrorType.XML_WRITE_ERROR, e);
+		} catch (TransformerFactoryConfigurationError e) {
+			throw new ExerciseException(
+					ExerciseException.ErrorType.XML_WRITE_ERROR, e);
+		}
+
 		return result;
 	}
 
@@ -69,16 +69,26 @@ ExerciseXMLHandler<MathPathExerciseData> {
 
 			String amountAttribute = doc.getDocumentElement().getAttribute(
 					"amountOfOptions");
-			String minAttribute = doc.getDocumentElement().getAttribute("minValue");
-			String maxAttribute = doc.getDocumentElement().getAttribute("maxValue");
-			String lengthAttribute = doc.getDocumentElement().getAttribute("pathLength");
-			
+			String minAttribute = doc.getDocumentElement().getAttribute(
+					"minValue");
+			String maxAttribute = doc.getDocumentElement().getAttribute(
+					"maxValue");
+			String lengthAttribute = doc.getDocumentElement().getAttribute(
+					"pathLength");
+			String isRandomGenerated = doc.getDocumentElement().getAttribute(
+					"isRandomGen");
+			String inputAnswer = doc.getDocumentElement().getAttribute(
+					"answerValue");
+
 			int parsedAmount = Integer.parseInt(amountAttribute);
 			int parsedMin = Integer.parseInt(minAttribute);
 			int parsedMax = Integer.parseInt(maxAttribute);
 			int parsedLength = Integer.parseInt(lengthAttribute);
+			boolean parsedRandomGen = Boolean.parseBoolean(isRandomGenerated);
+			int parsedAnswer = Integer.parseInt(inputAnswer);
 
-			res = new MathPathExerciseData(parsedMin, parsedMax, parsedAmount, parsedLength);
+			res = new MathPathExerciseData(parsedMin, parsedMax, parsedAmount,
+					parsedLength, parsedRandomGen, parsedAnswer);
 
 		} catch (ParserConfigurationException e) {
 			throw new ExerciseException(
@@ -93,6 +103,4 @@ ExerciseXMLHandler<MathPathExerciseData> {
 
 		return res;
 	}
-
-
 }
