@@ -18,19 +18,16 @@
 }
 
 
-
 /* Base element. */
 .v-progressindicator-indicator {
-	background-color: (255, 146, 123);
+	background: rgb(135, 208, 152);
 	height: 20px;
 }
  
 /* Progress indication element on top of the base. */
 .v-progressindicator-wrapper div,
 .v-progressindicator-wrapper {
-	background-color: (255, 146, 123);
 	height: 18px;
-	
 }
 
 .v-Notification.mathpath {
