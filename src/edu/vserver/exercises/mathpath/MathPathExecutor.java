@@ -1,7 +1,5 @@
 package edu.vserver.exercises.mathpath;
 
-import com.vaadin.shared.ui.AlignmentInfo.Bits;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.ProgressIndicator;
@@ -17,15 +15,13 @@ import edu.vserver.exercises.model.ExerciseMaterialManager;
 import edu.vserver.exercises.model.ResourceGiver;
 import edu.vserver.exercises.model.SubmissionListener;
 import edu.vserver.exercises.model.SubmissionType;
-import edu.vserver.exercises.template.TemplateSubmissionInfo;
 
 public class MathPathExecutor extends VerticalLayout implements
 		Executor<MathPathExerciseData, MathPathSubmissionInfo> {
-	
+
 	private static final long serialVersionUID = 645228793345434162L;
-	
-	private final ExerciseExecutionHelper<MathPathSubmissionInfo> execHelper =
-			new ExerciseExecutionHelper<MathPathSubmissionInfo>();
+
+	private final ExerciseExecutionHelper<MathPathSubmissionInfo> execHelper = new ExerciseExecutionHelper<MathPathSubmissionInfo>();
 
 	// keep track of answers
 	private int correctAnswers;
@@ -33,10 +29,10 @@ public class MathPathExecutor extends VerticalLayout implements
 
 	// holds the answers
 	private PathModel path;
-	
+
 	// the component where we show the path
 	private PathLayout pathLayout;
-	
+
 	// the "number cruncher" which generates equations from a given result
 	private ArithmeticsInterface calc;
 
@@ -46,11 +42,11 @@ public class MathPathExecutor extends VerticalLayout implements
 	// how many correct answers is needed to complete the exercise
 	private int pathLength;
 
-	
 	protected void doLayout(int min, int max, int amountOfOptions,
-			int pathLength) {
-		
-		path = new PathModel(min, max, amountOfOptions);
+			int pathLength, boolean isRandomGenerated, int inputAnswer) {
+
+		path = new PathModel(min, max, amountOfOptions, isRandomGenerated,
+				inputAnswer);
 		calc = new AdditionGenerator(3);
 
 		this.pathLength = pathLength;
@@ -68,7 +64,6 @@ public class MathPathExecutor extends VerticalLayout implements
 		progressBar.setIndeterminate(false);
 		progressBar.setHeight("20px");
 		progressBar.setSizeFull();
-		
 
 		setWidth("640px");
 		addComponent(progressBar);
@@ -103,7 +98,9 @@ public class MathPathExecutor extends VerticalLayout implements
 			ExerciseMaterialManager materials, ExecutionSettings execSettings)
 			throws ExerciseException {
 		doLayout(exerciseData.getMin(), exerciseData.getMax(),
-				exerciseData.getAmountOfOptions(), exerciseData.getPathLength());
+				exerciseData.getAmountOfOptions(),
+				exerciseData.getPathLength(),
+				exerciseData.getRandomGenerated(), exerciseData.getAnswer());
 
 	}
 
@@ -144,8 +141,9 @@ public class MathPathExecutor extends VerticalLayout implements
 
 	@Override
 	public void askSubmit(SubmissionType askedSubmType) {
-		execHelper.informOnlySubmit(correctAnswers/(wrongAnswers + correctAnswers), 
-				new MathPathSubmissionInfo(correctAnswers, wrongAnswers), askedSubmType, null);
+		execHelper.informOnlySubmit(correctAnswers
+				/ (wrongAnswers + correctAnswers), new MathPathSubmissionInfo(
+				correctAnswers, wrongAnswers), askedSubmType, null);
 	}
 
 	@Override

@@ -6,67 +6,77 @@ import java.util.Random;
 
 public class PathModel {
 
-    private ArrayList<Integer> list;
+	private final ArrayList<Integer> list;
 
-    private int min, max, amountOfOptions;
+	private final int min, max, amountOfOptions;
+	private final boolean correctAnswerIsGenerated;
+	private int correctAnswer = 0;
 
-    private int correctAnswer = 0;
+	private static Random rnd = new Random();
 
-    private static Random rnd = new Random();
+	/*
+	 * @.pre amountOfOptions > 0
+	 */
+	public PathModel(int min, int max, int amountOfOptions,
+			boolean correctAnswerIsGenerated, int inputAnswer) {
+		list = new ArrayList<Integer>();
+		this.min = min;
+		this.max = max;
+		this.amountOfOptions = amountOfOptions;
+		this.correctAnswerIsGenerated = correctAnswerIsGenerated;
 
-    /*
-     * @.pre amountOfOptions > 0
-     */
-    public PathModel(int min, int max, int amountOfOptions) {
-        list = new ArrayList<Integer>();
-        this.min = min;
-        this.max = max;
-        this.amountOfOptions = amountOfOptions;
-        generateAnswers();
+		if (correctAnswerIsGenerated) {
+			generateAnswers();
+		} else {
+			correctAnswer = inputAnswer;
+			generateAnswers();
+		}
 
-    }
+	}
 
-    private void generateAnswers() {
-        if (correctAnswer == 0) {
-        	correctAnswer = rnd.nextInt(max - min + 1) + min;
-        }
-        
-        list.add(correctAnswer);
-        generateWrongAnswers(correctAnswer);
+	private void generateAnswers() {
+		if (correctAnswer == 0) {
+			correctAnswer = rnd.nextInt(max - min + 1) + min;
+		}
 
-        Collections.shuffle(list);
-    }
+		list.add(correctAnswer);
+		generateWrongAnswers(correctAnswer);
 
-    private void generateWrongAnswers(int correctAnswer) {
+		Collections.shuffle(list);
+	}
 
-        while (list.size() < amountOfOptions) {
-            int wrongAnswer = rnd.nextInt(max - min + 1) + min;
-            if (wrongAnswer != correctAnswer) {
-                list.add(wrongAnswer);
-            }
-        }
-    }
+	private void generateWrongAnswers(int correctAnswer) {
 
-    public int getOption(int i) {
-        return list.get(i);
-    }
+		while (list.size() < amountOfOptions) {
+			int wrongAnswer = rnd.nextInt(max - min + 1) + min;
+			if (wrongAnswer != correctAnswer) {
+				list.add(wrongAnswer);
+			}
+		}
+	}
 
-    public int getLength() {
-        return list.size();
-    }
+	public int getOption(int i) {
+		return list.get(i);
+	}
 
-    public int getCorrectAnswer() {
-        return correctAnswer;
-    }
+	public int getLength() {
+		return list.size();
+	}
 
-    public void generateNewAnswers() {
-        list.clear();
+	public int getCorrectAnswer() {
+		return correctAnswer;
+	}
 
-        generateAnswers();
-    }
-    
-    public void resetCorrectAnswer() {
-    	correctAnswer = 0;
-    }
+	public void generateNewAnswers() {
+		list.clear();
+
+		generateAnswers();
+	}
+
+	public void resetCorrectAnswer() {
+		if (correctAnswerIsGenerated == true) {
+			correctAnswer = 0;
+		}
+	}
 
 }
