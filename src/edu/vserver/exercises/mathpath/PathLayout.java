@@ -32,7 +32,7 @@ public class PathLayout extends AbsoluteLayout {
         middleButton = new Button("");
         middleButton.setStyleName("mathpath-middle");
         
-        addComponent(middleButton, "top:50%; right:50%");
+        addComponent(middleButton, "top:50%; left:25%");
         this.setStyleName("path-layout");
     }
 
@@ -90,7 +90,7 @@ public class PathLayout extends AbsoluteLayout {
         for (int i = 0; i < currentOptions.size(); i++) {
             // format the vertical alignment
             String position = "top:" + heightIncrement * (i + 1)
-                    + "%; right:10%";
+                    + "%; right:15%";
 
             addComponent(currentOptions.get(i), position);
 

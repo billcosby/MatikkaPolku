@@ -2,7 +2,7 @@
 .mathpath-middle, 
 .mathpath-middle:focus,
 .mathpath-middle:active {
-	background-color: rgb(161, 255, 161);
+	background-color: rgb(144, 180, 180);
 	font-size: 130%;
 	
 
@@ -12,21 +12,30 @@
 .mathpath-option,
 .mathpath-option:focus,
 .mathpath-option:active {
-	background-color: rgb(161, 161, 255);
+	background-color: rgb(135, 208, 152);
 	font-size: 130%;
 
 }
 
+
+
 /* Base element. */
 .v-progressindicator-indicator {
-	background-color: rgb(200, 255, 100);
+	background-color: (255, 146, 123);
+	height: 20px;
 }
  
 /* Progress indication element on top of the base. */
-.v-progressindicator-wrapper div {}
+.v-progressindicator-wrapper div,
+.v-progressindicator-wrapper {
+	background-color: (255, 146, 123);
+	height: 18px;
+	
+}
+
 
 
 .path-layout {
-	background-color: rgb(240,250,255);
+	background-color: rgb(240, 250, 250);
 	border: 1px solid rgb(220,220,220);
 }
