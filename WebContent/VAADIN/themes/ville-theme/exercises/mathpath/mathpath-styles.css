@@ -33,7 +33,11 @@
 	
 }
 
-
+.v-Notification.mathpath {
+    background: red;
+    border: 10px solid #C00000;
+    color: black;
+}
 
 .path-layout {
 	background-color: rgb(240, 250, 250);
