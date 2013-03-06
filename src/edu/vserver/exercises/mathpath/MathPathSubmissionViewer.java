@@ -2,17 +2,22 @@ package edu.vserver.exercises.mathpath;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 
 import edu.vserver.exercises.model.ExerciseException;
 import edu.vserver.exercises.model.ExerciseMaterialManager;
 import edu.vserver.exercises.model.ResourceGiver;
 import edu.vserver.exercises.model.SubmissionVisualizer;
 
-public class MathPathSubmissionViewer implements
+public class MathPathSubmissionViewer extends VerticalLayout implements
 		SubmissionVisualizer<MathPathExerciseData, MathPathSubmissionInfo> {
 
 	private MathPathExerciseData exer;
 	private MathPathSubmissionInfo submInfo;
+
+	public MathPathSubmissionViewer() {
+
+	}
 
 	@Override
 	public void initialize(MathPathExerciseData exercise,
@@ -20,20 +25,28 @@ public class MathPathSubmissionViewer implements
 			ExerciseMaterialManager matManager) throws ExerciseException {
 		exer = exercise;
 		submInfo = dataObject;
+		doLayout();
 
 	}
-	
-	/*private void doLayout() {
-		this.addComponent(new Label("Question: " + exer.getQuestion()));
-		Label answ = new Label("Answer: " + submInfo.getAnswer());
-		answ.addStyleName("template-exercise-answer");
-		this.addComponent(answ);
-	}*/
+
+	private void doLayout() {
+
+		Label correctAnsw = new Label("Amount of correct answers: "
+				+ submInfo.getCorrectAnswers());
+		Label wrongAnsw = new Label("Amount of wrong answers: "
+				+ submInfo.getWrongAnswers());
+
+		correctAnsw.addStyleName("mathpath-correct-answer");
+		wrongAnsw.addStyleName("mathpath-wrong-answer");
+
+		addComponent(correctAnsw);
+		addComponent(wrongAnsw);
+	}
 
 	@Override
 	public Component getView() {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	@Override
