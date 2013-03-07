@@ -30,10 +30,15 @@
 	height: 18px;
 }
 
-.v-Notification.mathpath {
+.v-Notification.wrongAnswer {
     background: red;
-    border: 10px solid #C00000;
+    border: 2px solid #C00000;
     color: black;
+}
+.v-Notification.correctAnswer {
+	background: green;
+	border: 2px solid #00b809;
+	color: black;
 }
 
 .path-layout {

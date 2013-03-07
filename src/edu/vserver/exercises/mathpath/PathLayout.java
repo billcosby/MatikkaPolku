@@ -61,18 +61,20 @@ public class PathLayout extends AbsoluteLayout {
 		button.setEnabled(false);
 
 		Notification wrong = new Notification("Try again!", "");
-		// Notification.show("Try again!");
-
 		wrong.setDelayMsec(4);
 		wrong.setPosition(Position.MIDDLE_CENTER);
-		wrong.setStyleName("mathpath");
-
+		wrong.setStyleName("wrongAnswer");
 		wrong.show(Page.getCurrent());
 		executor.handleWrongAnswer();
 	}
 
 	private void handleCorrectAnswer() {
-		Notification.show("Correct!");
+
+		Notification correct = new Notification("Correct!", "");
+		correct.setDelayMsec(4);
+		correct.setPosition(Position.MIDDLE_CENTER);
+		correct.setStyleName("correctAnswer");
+		correct.show(Page.getCurrent());
 		executor.handleCorrectAnswer();
 	}
 
