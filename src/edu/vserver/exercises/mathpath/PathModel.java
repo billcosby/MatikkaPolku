@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Generates and contains the correct answers to equations in the 
+ * current step in the game. There is one correct answer and the rest are
+ * guaranteed to be wrong.
+ */
 public class PathModel {
 
 	private final ArrayList<Integer> list;

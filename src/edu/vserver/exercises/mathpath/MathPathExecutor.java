@@ -16,6 +16,11 @@ import edu.vserver.exercises.model.ResourceGiver;
 import edu.vserver.exercises.model.SubmissionListener;
 import edu.vserver.exercises.model.SubmissionType;
 
+
+/**
+ * Launches the main exercise view and handles communication between
+ * model (PathModel) and view (PathLayout)
+ */
 public class MathPathExecutor extends VerticalLayout implements
 		Executor<MathPathExerciseData, MathPathSubmissionInfo> {
 

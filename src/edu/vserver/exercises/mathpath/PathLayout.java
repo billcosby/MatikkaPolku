@@ -10,6 +10,11 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Notification;
 
+
+/**
+ *	The component that contains the actual interface for the
+ *	exercise.
+ */
 public class PathLayout extends AbsoluteLayout {
 
 	private static final long serialVersionUID = 1L;
