@@ -31,14 +31,14 @@
 }
 
 .v-Notification.wrongAnswer {
-    background: red;
-    border: 2px solid #C00000;
-    color: black;
+    background: #ff2558;
+    border: 0px solid #ff6a8d;
+    color: white;
 }
 .v-Notification.correctAnswer {
-	background: green;
-	border: 2px solid #00b809;
-	color: black;
+	background: #56ff56;
+	border: 0px solid #00b809;
+	color: white;
 }
 
 .path-layout {

@@ -60,7 +60,7 @@ public class PathLayout extends AbsoluteLayout {
 	private void handleWrongAnswer(Button button) {
 		button.setEnabled(false);
 
-		Notification wrong = new Notification("Try again!", "");
+		Notification wrong = new Notification("Try again! :/");
 		wrong.setDelayMsec(4);
 		wrong.setPosition(Position.MIDDLE_CENTER);
 		wrong.setStyleName("wrongAnswer");
@@ -70,7 +70,7 @@ public class PathLayout extends AbsoluteLayout {
 
 	private void handleCorrectAnswer() {
 
-		Notification correct = new Notification("Correct!", "");
+		Notification correct = new Notification("Correct! :)");
 		correct.setDelayMsec(4);
 		correct.setPosition(Position.MIDDLE_CENTER);
 		correct.setStyleName("correctAnswer");
